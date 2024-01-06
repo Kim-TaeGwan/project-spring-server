@@ -17,13 +17,13 @@ public class SummonerController {
 
     public SummonerController(RiotAPIService riotAPIService, ObjectMapper objectMapper) {
         this.riotAPIService = riotAPIService;
-        this.objectMapper = objectMapper;
+        this.objectMapper = objectMapper; // JSON 데이터를 객체로 변환하거나 객체를 JSON 으로 직렬화 하는데 사용.
     }
 
     @GetMapping("/by-name")
     public ResponseEntity<RiotApiDTO> summonerData(@RequestParam("name") String summonerName) {
         String response = riotAPIService.callRiotAPI("/lol/summoner/v4/summoners/by-name/" + summonerName);
-        System.out.println("Response: " + response);
+        System.out.println("summonerData: " + response);
 
         if (response == null || response.isEmpty()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

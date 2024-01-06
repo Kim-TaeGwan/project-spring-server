@@ -24,11 +24,13 @@ public class RiotAPIService {
     public String callRiotAPI(String url) {
         try {
             String apiUrl = riotApiBaseUrl + url + "?api_key=" + apiKey;
-            return restTemplate.getForObject(apiUrl, String.class);
+            // getForObject 는 RestTemplate 의 메서드 중 하나로, 지정된 URL로 HTTP GET 요청을 보내고 헤당 요청에 대한 응답을 받아오는 역할을 한다.
+            // String.class 는 getForObject 메소드에서 반환할 응답 데이터의 형식을 지정하는데 사용된다.
+            // 여기서는 API 응답이 문자열로 예상되므로 String.class 를 사용하여 응답 데이터를 문자열로 변환한다.
+            return restTemplate.getForObject(apiUrl, String.class); // GET 요청을 수행하고 응답을 문자열로 변환
         }
         catch (HttpClientErrorException | HttpServerErrorException e) {
             String errorMessage = e.getResponseBodyAsString();
-            System.out.println("Error Message: " + errorMessage);
             return errorMessage; // 에러 메시지 반환
         } catch (Exception e) {
             // 기타 예외 처리
