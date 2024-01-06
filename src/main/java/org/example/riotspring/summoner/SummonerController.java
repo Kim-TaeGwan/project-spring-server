@@ -21,7 +21,7 @@ public class SummonerController {
     }
 
     @GetMapping("/by-name")
-    public ResponseEntity<RiotApiDTO> summonerData(@RequestParam("name") String summonerName) {
+    public ResponseEntity<RiotApiDTO<SummonerDTO>> summonerData(@RequestParam("name") String summonerName) {
         String response = riotAPIService.callRiotAPI("/lol/summoner/v4/summoners/by-name/" + summonerName);
         System.out.println("summonerData: " + response);
 
@@ -30,8 +30,9 @@ public class SummonerController {
         }
 
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             JsonNode responseNode = objectMapper.readTree(response);
-            RiotApiDTO responseDTO = new RiotApiDTO();
+            RiotApiDTO<SummonerDTO> responseDTO = new RiotApiDTO<>();
 
             if (responseNode.has("status")) {
                 JsonNode status = responseNode.get("status");
