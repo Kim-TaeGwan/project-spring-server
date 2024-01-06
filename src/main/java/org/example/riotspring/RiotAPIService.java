@@ -27,9 +27,9 @@ public class RiotAPIService {
             return restTemplate.getForObject(apiUrl, String.class);
         }
         catch (HttpClientErrorException | HttpServerErrorException e) {
-            // HTTP 에러 처리
-            System.out.println("eeee : " + e);
-            throw new RuntimeException("HTTP 에러 발생: " + e.getMessage(), e);
+            String errorMessage = e.getResponseBodyAsString();
+            System.out.println("Error Message: " + errorMessage);
+            return errorMessage; // 에러 메시지 반환
         } catch (Exception e) {
             // 기타 예외 처리
             throw new RuntimeException("서버 오류 발생: " + e.getMessage(), e);
