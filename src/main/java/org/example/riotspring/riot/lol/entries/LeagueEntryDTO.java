@@ -1,4 +1,4 @@
-package org.example.riotspring.entries;
+package org.example.riotspring.riot.lol.summoner.entries;
 
 import lombok.Data;
 
