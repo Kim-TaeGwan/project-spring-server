@@ -1,4 +1,7 @@
 
-# Riot Spring API - op.gg clone coding
+# Project Spring Server
 
-Riot api 를 이용한 spring server project
+```
+- Riot Spring API - op.gg clone coding
+```
+

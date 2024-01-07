@@ -1,4 +1,4 @@
-package org.example.riotspring.riot;
+package org.example.projectspringserver.riot;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;

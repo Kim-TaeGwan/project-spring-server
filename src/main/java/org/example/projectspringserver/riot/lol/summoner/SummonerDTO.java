@@ -1,4 +1,4 @@
-package org.example.riotspring.riot.lol.summoner;
+package org.example.projectspringserver.riot.lol.summoner;
 
 import lombok.Data;
 

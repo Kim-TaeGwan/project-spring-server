@@ -1,4 +1,4 @@
-package org.example.riotspring.riot;
+package org.example.projectspringserver.riot;
 
 import lombok.Data;
 

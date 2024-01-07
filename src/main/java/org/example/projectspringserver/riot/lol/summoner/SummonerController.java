@@ -1,9 +1,9 @@
-package org.example.riotspring.riot.lol.summoner;
+package org.example.projectspringserver.riot.lol.summoner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.riotspring.riot.RiotAPIService;
-import org.example.riotspring.riot.RiotApiDTO;
-import org.example.riotspring.riot.BaseController;
+import org.example.projectspringserver.riot.RiotAPIService;
+import org.example.projectspringserver.riot.RiotApiDTO;
+import org.example.projectspringserver.riot.BaseController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
