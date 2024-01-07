@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.example.riotspring.riot.lol.summoner.entries.LeagueEntryDTO;
 
 @RestController
-@RequestMapping("/api/entries")
+@RequestMapping("/api/riot/entries")
 public class EntryController extends BaseController<LeagueEntryDTO[]> {
     public EntryController(RiotAPIService riotAPIService, ObjectMapper objectMapper) {
         super(riotAPIService, objectMapper);

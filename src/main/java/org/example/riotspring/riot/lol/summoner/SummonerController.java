@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/summoners")
+@RequestMapping("/api/riot/summoners")
 public class SummonerController extends BaseController<SummonerDTO> {
     public SummonerController(RiotAPIService riotAPIService, ObjectMapper objectMapper) {
         super(riotAPIService, objectMapper);
