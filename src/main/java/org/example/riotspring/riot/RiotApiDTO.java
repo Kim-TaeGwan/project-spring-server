@@ -1,10 +1,10 @@
-package org.example.riotspring;
+package org.example.riotspring.riot;
 
 import lombok.Data;
 
 @Data
-public class RiotApiDTO {
+public class RiotApiDTO<T> {
     private int statusCode;
-    private Object data;
+    private T data;
     private String message;
 }

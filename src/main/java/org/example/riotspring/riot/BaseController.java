@@ -1,29 +1,23 @@
-package org.example.riotspring.summoner;
+package org.example.riotspring.riot;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.riotspring.RiotAPIService;
-import org.example.riotspring.RiotApiDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/summoners")
-public class SummonerController {
-
+public class BaseController<T> {
     private final RiotAPIService riotAPIService;
     private final ObjectMapper objectMapper;
 
-    public SummonerController(RiotAPIService riotAPIService, ObjectMapper objectMapper) {
+    public BaseController(RiotAPIService riotAPIService, ObjectMapper objectMapper) {
         this.riotAPIService = riotAPIService;
-        this.objectMapper = objectMapper; // JSON 데이터를 객체로 변환하거나 객체를 JSON 으로 직렬화 하는데 사용.
+        this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/by-name")
-    public ResponseEntity<RiotApiDTO> summonerData(@RequestParam("name") String summonerName) {
-        String response = riotAPIService.callRiotAPI("/lol/summoner/v4/summoners/by-name/" + summonerName);
-        System.out.println("summonerData: " + response);
+    protected ResponseEntity<RiotApiDTO<T>> fetchData(String apiPath) {
+        String response = riotAPIService.callRiotAPI(apiPath);
+        System.out.println("fetchData: " + response);
 
         if (response == null || response.isEmpty()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -31,7 +25,7 @@ public class SummonerController {
 
         try {
             JsonNode responseNode = objectMapper.readTree(response);
-            RiotApiDTO responseDTO = new RiotApiDTO();
+            RiotApiDTO<T> responseDTO = new RiotApiDTO<>();
 
             if (responseNode.has("status")) {
                 JsonNode status = responseNode.get("status");
@@ -43,9 +37,9 @@ public class SummonerController {
                 responseDTO.setMessage(errorMessage);
             } else {
                 // 성공적인 응답 처리
-                SummonerDTO summonerDTO = objectMapper.convertValue(responseNode, SummonerDTO.class);
+                T data = objectMapper.convertValue(responseNode, new TypeReference<T>() {});
                 responseDTO.setStatusCode(200);
-                responseDTO.setData(summonerDTO);
+                responseDTO.setData(data);
             }
 
             return ResponseEntity.status(responseDTO.getStatusCode()).body(responseDTO);
@@ -56,6 +50,3 @@ public class SummonerController {
         }
     }
 }
-
-
-
