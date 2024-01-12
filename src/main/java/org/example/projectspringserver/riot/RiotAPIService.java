@@ -11,7 +11,9 @@ import org.springframework.web.client.RestTemplate;
 public class RiotAPIService {
     // RestTemplate 은 HTTP 클라이언트 라이브러리로, 외부 API 와 통신을 단순화하고 쉽게 수행할 수 있게 해준다.
     private final RestTemplate restTemplate;
+    @Value("${riot.api.key}")
     private final String apiKey;
+    @Value("${riot.api.baseUrl}")
     private final String riotApiBaseUrl;
 
     // RestTemplateBuilder 는 RestTemplate 을 더 쉽게 구성하고 생성하는 데 사용되는 빌더 클래스이다.
