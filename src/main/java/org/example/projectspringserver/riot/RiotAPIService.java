@@ -32,8 +32,7 @@ public class RiotAPIService {
             return restTemplate.getForObject(apiUrl, String.class); // GET 요청을 수행하고 응답을 문자열로 변환
         }
         catch (HttpClientErrorException | HttpServerErrorException e) {
-            String errorMessage = e.getResponseBodyAsString();
-            return errorMessage; // 에러 메시지 반환
+            return e.getResponseBodyAsString(); // 에러 메시지 반환
         } catch (Exception e) {
             // 기타 예외 처리
             throw new RuntimeException("서버 오류 발생: " + e.getMessage(), e);

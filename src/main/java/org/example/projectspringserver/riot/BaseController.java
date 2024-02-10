@@ -17,7 +17,7 @@ public class BaseController<T> {
 
     protected ResponseEntity<RiotApiDTO<T>> fetchData(String apiPath) {
         String response = riotAPIService.callRiotAPI(apiPath);
-        System.out.println("featchURL : " + apiPath);
+        System.out.println("fetchURL : " + apiPath);
         System.out.println("fetchData : " + response);
 
         if (response == null || response.isEmpty()) {
